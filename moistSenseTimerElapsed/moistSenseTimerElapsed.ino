@@ -6,8 +6,14 @@ const int pumpPin =  PB0;      // the number of the LED pin
 // LED_BUILTIN  instead of 'led'
 // 
 elapsedMillis timer0;
-#define timerinterval 1000
-#define pumpinterval  500
+
+// attiny85 1000 = 10 sec
+// attiny85 100 = 1 sec * 60 = 6000
+
+#define timerinterval 360000 // 1 hour?
+#define pumpinterval  7500 // 1 min
+//#define pumpinterval  15000 // 2min
+
 // the interval in mS 
 boolean pumpActive = false;
 
@@ -17,6 +23,10 @@ void setup() {
   // initialize the digital pin as an output.
   pinMode(pumpPin, OUTPUT);
   timer0 = 0; // clear the timer at the end of startup
+  
+  pumpActive = true;
+  digitalWrite(pumpPin, HIGH);    // turn the LED off by making the voltage LOW
+  
 }
 
 void loop() {
